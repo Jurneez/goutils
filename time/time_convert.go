@@ -1,4 +1,4 @@
-package time_convert
+package time
 
 import (
 	"fmt"
