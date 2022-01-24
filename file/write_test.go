@@ -1,9 +1,13 @@
 package file
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func Test_CreateAndAppend(t *testing.T) {
-	CreateAndAppend("第一")
-	CreateAndAppend("第二")
-
+	err := CreateAndAppend("第一", "xs.txt")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 }
