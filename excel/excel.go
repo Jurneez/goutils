@@ -1,25 +1,44 @@
 package excel
 
 import (
+	"errors"
+
 	"github.com/tealeg/xlsx"
 )
 
 type Excel struct {
-	Sheets []*Sheet
+	Sheets   []*Sheet
+	FilePath string
+	File     *xlsx.File
 }
 type Sheet struct {
+	name   string
 	titles []string // excel的头部名称
 	cells  [][]interface{}
 }
 
 func NewExcel() *Excel {
 	return &Excel{
-		Sheets: make([]*Sheet, 0),
+		Sheets:   make([]*Sheet, 0),
+		FilePath: "./excel.xlsx",
+		File:     xlsx.NewFile(),
 	}
 }
 
-func (e *Excel) SetSheet() {
+func (e *Excel) SetFilePath(path string) {
+	e.FilePath = path
+}
 
+func (e *Excel) SetSheet(sheetName string) error {
+	sheet, err := e.File.AddSheet(sheetName)
+	if err != nil {
+		return err
+	}
+	if sheet == nil {
+		return errors.New("error")
+	}
+
+	return nil
 }
 
 func Excel1() {
