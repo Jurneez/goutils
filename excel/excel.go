@@ -4,7 +4,25 @@ import (
 	"github.com/tealeg/xlsx"
 )
 
-func Excel() {
+type Excel struct {
+	Sheets []*Sheet
+}
+type Sheet struct {
+	titles []string // excel的头部名称
+	cells  [][]interface{}
+}
+
+func NewExcel() *Excel {
+	return &Excel{
+		Sheets: make([]*Sheet, 0),
+	}
+}
+
+func (e *Excel) SetSheet() {
+
+}
+
+func Excel1() {
 	file := xlsx.NewFile()
 	sheet, _ := file.AddSheet("Sheet1")
 	row := sheet.AddRow()
