@@ -8,7 +8,7 @@ func Deduplicate(data interface{}) interface{} {
 	if inArr.Kind() != reflect.Slice && inArr.Kind() != reflect.Array {
 		return data
 	}
-	existMap := make(map[interface{}]bool)
+	existMap := make(map[interface{}]interface{})
 	outArr := reflect.MakeSlice(inArr.Type(), 0, inArr.Len())
 
 	for i := 0; i < inArr.Len(); i++ {
@@ -16,7 +16,7 @@ func Deduplicate(data interface{}) interface{} {
 
 		if _, ok := existMap[iVal.Interface()]; !ok {
 			outArr = reflect.Append(outArr, inArr.Index(i))
-			existMap[iVal.Interface()] = true
+			existMap[iVal.Interface()] = struct{}{}
 		}
 	}
 	return outArr.Interface()
